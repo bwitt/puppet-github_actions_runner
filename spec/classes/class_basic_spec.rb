@@ -43,7 +43,7 @@ describe 'github_actions_runner' do
               'ensure' => 'directory',
               'owner' => 'root',
               'group' => 'root',
-              'mode' => '0750',
+              'mode' => '0755',
             )
           end
         end
@@ -58,7 +58,7 @@ describe 'github_actions_runner' do
               'ensure' => 'directory',
               'owner' => 'root',
               'group' => 'root',
-              'mode' => '0750',
+              'mode' => '0755',
             )
           end
 

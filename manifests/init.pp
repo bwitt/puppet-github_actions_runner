@@ -84,9 +84,10 @@ class github_actions_runner (
     }
   }
 
+  # Instances may run as other users, which need to traverse this directory
   file { $github_actions_runner::root_dir:
     ensure => $ensure_directory,
-    mode   => '0750',
+    mode   => '0755',
     owner  => $github_actions_runner::user,
     group  => $github_actions_runner::group,
     force  => true,
