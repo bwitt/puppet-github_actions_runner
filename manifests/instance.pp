@@ -125,18 +125,20 @@ define github_actions_runner::instance (
   }
 
   archive { "${instance_name}-${archive_name}":
-    ensure       => $ensure,
-    path         => "/tmp/${instance_name}-${archive_name}",
-    user         => $user,
-    group        => $group,
-    source       => $source,
-    extract      => true,
-    extract_path => "${github_actions_runner::root_dir}/${instance_name}",
-    creates      => "${github_actions_runner::root_dir}/${instance_name}/bin",
-    cleanup      => true,
-    proxy_server => $http_proxy,
-    proxy_type   => $proxy_type,
-    require      => File["${github_actions_runner::root_dir}/${instance_name}"],
+    ensure        => $ensure,
+    path          => "/tmp/${instance_name}-${archive_name}",
+    user          => $user,
+    group         => $group,
+    source        => $source,
+    extract       => true,
+    # keep the mode of the managed instance directory
+    extract_flags => '--no-overwrite-dir -xzf',
+    extract_path  => "${github_actions_runner::root_dir}/${instance_name}",
+    creates       => "${github_actions_runner::root_dir}/${instance_name}/bin",
+    cleanup       => true,
+    proxy_server  => $http_proxy,
+    proxy_type    => $proxy_type,
+    require       => File["${github_actions_runner::root_dir}/${instance_name}"],
   }
 
   $data = {
